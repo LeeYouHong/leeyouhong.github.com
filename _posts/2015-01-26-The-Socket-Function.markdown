@@ -42,8 +42,9 @@ _protocol_
 The _protocol_ argument specifies a particular protocol to be used with socket.Normally only a single protocol exists to support a particular socket type within a given protocol family, in which case protocol can be specified as 0. However, it is possible that many protocols may exist, in which case a particular protocol must be specified in this manner.
 
 ###RETURN VALUE
-On success, a file descriptor for the new socket is returned.
-On error, -1 is returned, and `errno` is set appropriately.
+
+* On success, a file descriptor for the new socket is returned.
+* On error, -1 is returned, and `errno` is set appropriately.
 
 ###ERRORS
 

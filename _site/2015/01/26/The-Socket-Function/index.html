@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Socket Function &#8211; LeeYouHong</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Enjoy Coding Life.">
+    <meta name="author" content="LeeYouHong">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="/2015/01/26/The-Socket-Function/">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/pixyll.css" type="text/css">
+
+    <!-- Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Merriweather:900,900italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:900,300' rel='stylesheet' type='text/css'>
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Socket Function">
+    <meta property="og:description" content="Enjoy Coding Life.">
+    <meta property="og:url" content="/2015/01/26/The-Socket-Function/">
+    <meta property="og:site_name" content="LeeYouHong">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+</head>
+
+<body class="">
+  <div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <a href="" class="site-title">LeeYouHong</a>
+      <nav class="site-nav right">
+        <a href="/">Home</a>
+<a href="/about/">About</a>
+<!-- <a href="/contact/">Contact</a> -->
+
+      </nav>
+      <div class="clearfix"></div>
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>The Socket Function</h1>
+  <span class="post-meta">Jan 26, 2015</span><br>
+  
+  <span class="post-meta small">1 minute read</span>
+</div>
+
+<article class="post-content">
+  <h3 id="synopsis">SYNOPSIS</h3>
+
+<p>```
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;</p>
+
+<p>int socket(int domain, int type, int protocol);
+```</p>
+
+<h3 id="description">DESCRIPTION</h3>
+<p><code>socket()</code> creates an endpoint for communition  and return a descriptor.</p>
+
+<p><em>domain</em></p>
+
+<p>The <em>domain</em> argument specifies a communition domain; This selects the protocol family which will be used for communication.These family are defined in <code>&lt;sys/socket.h&gt;</code>.The formats include:</p>
+
+<ul>
+  <li>AF_UNIX,AF_LOCAL: Local communication</li>
+  <li>AF_INET: IPv4 Internet protocol</li>
+  <li>AF_INET6: IPv6 Internet protocol</li>
+</ul>
+
+<p><em>type</em></p>
+
+<p>The <em>type</em> argument specifies the communication semantics; Currently defined types are:</p>
+
+<ul>
+  <li>SOCK_STREAM: Provides sequenced, reliable, two-way, connection-based byte streams. An out-of-band data transmission mechanism may be supported.</li>
+  <li>SOCK_DGRAM: Support datagrams(connectionless, unreliable of a fixed maximum length).</li>
+  <li>SOCK_RAW: Provides raw network protocol access.</li>
+</ul>
+
+<p>Since Linux 2.6.27, the type argument serves a second purpose: in addition to sepecifying a socket type.</p>
+
+<ul>
+  <li>SOCK_NONBLOCK: Set the <code>O_NONBLOCK</code> file status flag on the new open file description. Using this flag saves extra calls to <code>fcntl</code> to achieve the same result.</li>
+  <li>SOCK_CLOEXEC: Set the close-on-exec(FD_CLOEXEC) flag on the new file description.</li>
+</ul>
+
+<p><em>protocol</em></p>
+
+<p>The <em>protocol</em> argument specifies a particular protocol to be used with socket.Normally only a single protocol exists to support a particular socket type within a given protocol family, in which case protocol can be specified as 0. However, it is possible that many protocols may exist, in which case a particular protocol must be specified in this manner.</p>
+
+<h3 id="return-value">RETURN VALUE</h3>
+
+<ul>
+  <li>On success, a file descriptor for the new socket is returned.</li>
+  <li>On error, -1 is returned, and <code>errno</code> is set appropriately.</li>
+</ul>
+
+<h3 id="errors">ERRORS</h3>
+
+<ul>
+  <li>EACCES: Permission to create a socket of the specified type and/or protocol is denied.</li>
+  <li>EAFNOSUPPORT: The implementation does not support the specified address family.</li>
+  <li>EINVAL: Unknow protocol, or protocol family not available.</li>
+  <li>EINVAL: Invalid flags in type.</li>
+  <li>EMFILE: Process file table overflow.</li>
+  <li>ENOBUFS: Insufficient memory is available. The socket cannot be create until sufficient resources are freed</li>
+  <li>EPROTNOSUPPORT: The protocol type or the specified protocol is not supported within this domain.</li>
+</ul>
+
+</article>
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+  <div class="p2 wrap">
+    <div class="measure mt1 center">
+      <small>
+        Theme and code by<a href="http://johnotander.com">John Otander</a> (<a href="https://twitter.com/4lpine">@4lpine</a>).available on <a href="https://github.com/johnotander/pixyll">Github</a>.
+      </small>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
