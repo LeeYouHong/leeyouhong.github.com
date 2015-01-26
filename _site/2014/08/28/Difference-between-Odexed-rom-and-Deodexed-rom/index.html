@@ -76,29 +76,34 @@
 </div>
 
 <article class="post-content">
-  <h2 id="what-is-odexed-rom-and-deodexed-rom">What is Odexed rom and Deodexed rom?</h2>
-<p>####Odexed Rom 
-Those apps are divided into two parts, one is <code>.apk</code> and other is <code>.odex</code>.This apps can’t be installed normally or by just copying they needed to be flashed via recovery.The cache for each APK is contained separately in a .odex file,which loads into the virtual machine at the time of boot.</p>
+  <h2>What is Odexed rom and Deodexed rom?</h2>
 
-<h4 id="deodexed-rom">Deodexed Rom</h4>
-<p>Those apps only one file which is <code>.apk</code>.They can be installed normall or by copying.The cache for each APK is contained with the APK itself as a <code>classes.dex</code> file.
-&gt;
-&gt; NOTE 1: Odex means a part of the app is already compiled and it is written into Dalvik Virtual Machine. 
-&gt;
-&gt; NOTE 2: Deodexing means the odex part of the file put back into the apk/jar.
-&gt;
-&gt; NOTE 3: In a odexed ROM, the <code>.odex</code> files for each /system partition APKs are written into the Dalvik Virtual Machine when the OS boots up.As opposed to the above, in a deodexed ROM, there is no cache information within the Dalvik Virtual Machine at the time of boot.So Deodexed ROM is slower.</p>
+<h4>Odexed Rom</h4>
 
-<h2 id="who-are-the-better">Who are the better?</h2>
+<p>Those apps are divided into two parts, one is <code>.apk</code> and other is <code>.odex</code>.This apps can't be installed normally or by just copying they needed to be flashed via recovery.The cache for each APK is contained separately in a .odex file,which loads into the virtual machine at the time of boot.</p>
+
+<h4>Deodexed Rom</h4>
+
+<p>Those apps only one file which is <code>.apk</code>.They can be installed normall or by copying.The cache for each APK is contained with the APK itself as a <code>classes.dex</code> file.</p>
+
+<blockquote><p>NOTE 1: Odex means a part of the app is already compiled and it is written into Dalvik Virtual Machine.</p>
+
+<p>NOTE 2: Deodexing means the odex part of the file put back into the apk/jar.</p>
+
+<p>NOTE 3: In a odexed ROM, the <code>.odex</code> files for each /system partition APKs are written into the Dalvik Virtual Machine when the OS boots up.As opposed to the above, in a deodexed ROM, there is no cache information within the Dalvik Virtual Machine at the time of boot.So Deodexed ROM is slower.</p></blockquote>
+
+<h2>Who are the better?</h2>
+
 <p>The benefits of having a Odexed ROM:
 - First boot is faster.
 - More secure.</p>
 
 <p>The benefits of having a Deodexed ROM:
-- More modification freedom. </p>
+- More modification freedom.</p>
 
-<h2 id="to-know-weather-your-phone-is-deodexed-or-odex">To know weather your phone is Deodexed or Odex</h2>
-<p>You just open <code>Root Explorer</code> app and navigate to <em>/sysytem/app</em> and check if there are files with “.odex”extension.If yes then your ROM is Odexed.Otherwise, your ROM is Deodexed. </p>
+<h2>To know weather your phone is Deodexed or Odex</h2>
+
+<p>You just open <code>Root Explorer</code> app and navigate to <em>/sysytem/app</em> and check if there are files with ".odex"extension.If yes then your ROM is Odexed.Otherwise, your ROM is Deodexed.</p>
 
 </article>
 

@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Difference between Parcelable and Serializable &#8211; LeeYouHong</title>
+    <title>The Socket Function &#8211; LeeYouHong</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Enjoy Coding Life.">
     <meta name="author" content="LeeYouHong">
     <meta name="keywords" content="">
-    <link rel="canonical" href="/2014/10/19/Difference-between-Parcelable-and-Serializable/">
+    <link rel="canonical" href="/2015/01/26/The-Socket-Function/">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/pixyll.css" type="text/css">
@@ -22,9 +22,9 @@
     <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Difference between Parcelable and Serializable">
+    <meta property="og:title" content="The Socket Function">
     <meta property="og:description" content="Enjoy Coding Life.">
-    <meta property="og:url" content="/2014/10/19/Difference-between-Parcelable-and-Serializable/">
+    <meta property="og:url" content="/2015/01/26/The-Socket-Function/">
     <meta property="og:site_name" content="LeeYouHong">
 
     <!-- Icons -->
@@ -68,33 +68,75 @@
         
 
 
-
-
 <div class="post-header mb2">
-  <h1>Difference between Parcelable and Serializable</h1>
-  <span class="post-meta">Oct 19, 2014</span><br>
+  <h1>The Socket Function</h1>
+  <span class="post-meta">Jan 26, 2015</span><br>
   
   <span class="post-meta small">1 minute read</span>
 </div>
 
 <article class="post-content">
-  <blockquote><p>In Android we know that we cannot just pass objects to Activity.We have two ways to do this, the objects must be either implements Pacelable or Serializable interface.So what are their different?</p></blockquote>
+  <h3>SYNOPSIS</h3>
 
-<p><strong>Serializable</strong></p>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+int socket(int domain, int type, int protocol);
+</code></pre>
+
+<h3>DESCRIPTION</h3>
+
+<p><code>socket()</code> creates an endpoint for communition  and return a descriptor.</p>
+
+<p><em>domain</em></p>
+
+<p>The <em>domain</em> argument specifies a communition domain; This selects the protocol family which will be used for communication.These family are defined in <code>&lt;sys/socket.h&gt;</code>.The formats include:</p>
 
 <ul>
-<li>Serializable is a standard Java interface. You simply mark a class Serializable by implement inteface, and Java will automatically serializable it.</li>
-<li>Serializable will create a lot of temporary objects and cause a bit of garbage collection.</li>
-<li>Serializable is easier to implement than Pacelable.</li>
+<li>AF_UNIX,AF_LOCAL: Local communication</li>
+<li>AF_INET: IPv4 Internet protocol</li>
+<li>AF_INET6: IPv6 Internet protocol</li>
 </ul>
 
 
-<p><strong>Parcelable</strong></p>
+<p><em>type</em></p>
+
+<p>The <em>type</em> argument specifies the communication semantics; Currently defined types are:</p>
 
 <ul>
-<li>Parcelable is a Android special interface when you implement the serializable in Android.It is more efficient than Serializable.</li>
-<li>Parcelable take more time for implement serialization than Serialization.</li>
-<li>Parcelable array can be pass via Intent in Android.</li>
+<li>SOCK_STREAM: Provides sequenced, reliable, two-way, connection-based byte streams. An out-of-band data transmission mechanism may be supported.</li>
+<li>SOCK_DGRAM: Support datagrams(connectionless, unreliable of a fixed maximum length).</li>
+<li>SOCK_RAW: Provides raw network protocol access.</li>
+</ul>
+
+
+<p>Since Linux 2.6.27, the type argument serves a second purpose: in addition to sepecifying a socket type.</p>
+
+<ul>
+<li>SOCK_NONBLOCK: Set the <code>O_NONBLOCK</code> file status flag on the new open file description. Using this flag saves extra calls to <code>fcntl</code> to achieve the same result.</li>
+<li>SOCK_CLOEXEC: Set the close-on-exec(FD_CLOEXEC) flag on the new file description.</li>
+</ul>
+
+
+<p><em>protocol</em></p>
+
+<p>The <em>protocol</em> argument specifies a particular protocol to be used with socket.Normally only a single protocol exists to support a particular socket type within a given protocol family, in which case protocol can be specified as 0. However, it is possible that many protocols may exist, in which case a particular protocol must be specified in this manner.</p>
+
+<h3>RETURN VALUE</h3>
+
+<p>On success, a file descriptor for the new socket is returned.
+On error, -1 is returned, and <code>errno</code> is set appropriately.</p>
+
+<h3>ERRORS</h3>
+
+<ul>
+<li>EACCES: Permission to create a socket of the specified type and/or protocol is denied.</li>
+<li>EAFNOSUPPORT: The implementation does not support the specified address family.</li>
+<li>EINVAL: Unknow protocol, or protocol family not available.</li>
+<li>EINVAL: Invalid flags in type.</li>
+<li>EMFILE: Process file table overflow.</li>
+<li>ENOBUFS: Insufficient memory is available. The socket cannot be create until sufficient resources are freed</li>
+<li>EPROTNOSUPPORT: The protocol type or the specified protocol is not supported within this domain.</li>
 </ul>
 
 
