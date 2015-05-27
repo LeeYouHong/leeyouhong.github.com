@@ -1,15 +1,15 @@
----
+ï»¿---
 layout: post
-title: QueueÑ§Ï°Ö®Singly-Linked-List
+title: Queueå­¦ä¹ ä¹‹Singly-Linked-List
 ---
 
 ##Singly-Linked-Lists
 
-Ôç¾ÍÌıËµÁË`libevent`Õâ¸ö¿ªÔ´ÍøÂç¿âµÄ´óÃû£¬¸ÕºÃ×î½üÊ±¼ä±È½ÏÏĞ£¬ËùÒÔ¾Í°İ¶ÁÒ»ÏÂ¡£¼Æ»®ÊÇ´Ó0.1°æ±¾£¨×îÔç°æ£©¿ªÊ¼¿´Æğ£¬ÒòÎªÎÒÏë¿´Ò»ÏÂ`libevent`³É³¤ÀúÊ·ºÍÍøÂçÍ¨ĞÅ·½ÃæµÄÏà¹Ø¼¼Êõ·¢Õ¹¡£ÔÚ`libevent0.1`°æ±¾ÖĞ£¬ºËĞÄ¾ÍÊÇ`event`Õâ¸ö½á¹¹ÌåÁË¡£¶øÕâ¸ö½á¹¹ÌåÖĞÓÖÓÃÁË`sys/queue.h`ÖĞµÄ`TAIL QUEUES`¡£Òò´Ë´òËãÏÈÑ§Ï°Ò»ÏÂ`sys/queue.h`ÖĞÌáµ½µÄ¼¸¸ö`queue`¡£±¾ÎÄ½«»á½²½âÒ»ÏÂ`sys/queue.h`ÖĞµÄ`Singly-Linked-Lists`¡£
+æ—©å°±å¬è¯´äº†`libevent`è¿™ä¸ªå¼€æºç½‘ç»œåº“çš„å¤§åï¼Œåˆšå¥½æœ€è¿‘æ—¶é—´æ¯”è¾ƒé—²ï¼Œæ‰€ä»¥å°±æ‹œè¯»ä¸€ä¸‹ã€‚è®¡åˆ’æ˜¯ä»0.1ç‰ˆæœ¬ï¼ˆæœ€æ—©ç‰ˆï¼‰å¼€å§‹çœ‹èµ·ï¼Œå› ä¸ºæˆ‘æƒ³çœ‹ä¸€ä¸‹`libevent`æˆé•¿å†å²å’Œç½‘ç»œé€šä¿¡æ–¹é¢çš„ç›¸å…³æŠ€æœ¯å‘å±•ã€‚åœ¨`libevent0.1`ç‰ˆæœ¬ä¸­ï¼Œæ ¸å¿ƒå°±æ˜¯`event`è¿™ä¸ªç»“æ„ä½“äº†ã€‚è€Œè¿™ä¸ªç»“æ„ä½“ä¸­åˆç”¨äº†`sys/queue.h`ä¸­çš„`TAIL QUEUES`ã€‚å› æ­¤æ‰“ç®—å…ˆå­¦ä¹ ä¸€ä¸‹`sys/queue.h`ä¸­æåˆ°çš„å‡ ä¸ª`queue`ã€‚æœ¬æ–‡å°†ä¼šè®²è§£ä¸€ä¸‹`sys/queue.h`ä¸­çš„`Singly-Linked-Lists`ã€‚
 
-> singly-linked listÓĞÒ»¸öSLIST_HEADºê¶¨ÒåµÄ½á¹¹×÷ÎªÁ´±íÍ·¡£Õâ¸ö½á¹¹°üº¬Ò»¸öÖ¸Ïò¸Ãµ¥ÏòÁ´±íµÚÒ»¸öÔªËØµÄÖ¸Õë¡£µ¥ÏòÁ´½ÓµÄÔªËØ¾ßÓĞ×îĞ¡µÄ¿Õ¼ä£¬ÒÆ³ıÈÎÒâÔªËØµÄÖ¸Õë²Ù×÷¿ªÏúÎªO(n)¡£ĞÂÔªËØ¿ÉÒÔ¼ÓÔÚÁ´±íÖĞÒÑ´æÔÚÔªËØµÄºóÃæ»òÕßÔÚÁ´±íµÄÍ·²¿¡£
+> singly-linked listæœ‰ä¸€ä¸ªSLIST_HEADå®å®šä¹‰çš„ç»“æ„ä½œä¸ºé“¾è¡¨å¤´ã€‚è¿™ä¸ªç»“æ„åŒ…å«ä¸€ä¸ªæŒ‡å‘è¯¥å•å‘é“¾è¡¨ç¬¬ä¸€ä¸ªå…ƒç´ çš„æŒ‡é’ˆã€‚å•å‘é“¾æ¥çš„å…ƒç´ å…·æœ‰æœ€å°çš„ç©ºé—´ï¼Œç§»é™¤ä»»æ„å…ƒç´ çš„æŒ‡é’ˆæ“ä½œå¼€é”€ä¸ºO(n)ã€‚æ–°å…ƒç´ å¯ä»¥åŠ åœ¨é“¾è¡¨ä¸­å·²å­˜åœ¨å…ƒç´ çš„åé¢æˆ–è€…åœ¨é“¾è¡¨çš„å¤´éƒ¨ã€‚
 
-###µ¥ÏòÁ´±íµÄºê¶¨Òå
+###å•å‘é“¾è¡¨çš„å®å®šä¹‰
 ```c++
 /*
  * Singly-linked List definitions.
@@ -62,48 +62,48 @@ struct {								\
 } while (0)
 ```
 
-`SLIST_HEAD` ½á¹¹¶¨ÒåÈçÏÂ£º
+`SLIST_HEAD` ç»“æ„å®šä¹‰å¦‚ä¸‹ï¼š
 ```c++
 SLIST_HEAD(HEADNAME, TYPE) head;
 ```
-`HEADNAME`ÊÇÒª¶¨ÒåµÄµ¥Á´±íÍ·½á¹¹ÌåµÄÃû×Ö£¬`TYPE`ÊÇÁ´±íÖĞµÄÔªËØÀàĞÍ¡£ÏÂÃæ¾ÍÊÇ¶¨ÒåÁËÒ»¸öµ¥Á´±íÍ·µÄÖ¸Õë£º
+`HEADNAME`æ˜¯è¦å®šä¹‰çš„å•é“¾è¡¨å¤´ç»“æ„ä½“çš„åå­—ï¼Œ`TYPE`æ˜¯é“¾è¡¨ä¸­çš„å…ƒç´ ç±»å‹ã€‚ä¸‹é¢å°±æ˜¯å®šä¹‰äº†ä¸€ä¸ªå•é“¾è¡¨å¤´çš„æŒ‡é’ˆï¼š
 ```c++
 struct HEADNAME *headp;
 ```
-`SLIST_ENTRY`ºêÉùÃ÷ÁËÒ»¸öÁ¬½Óµ¥Á´±íÄÚÔªËØµÄ½á¹¹Ìå
-`SLIST_INIT`ºêÍ¨¹ı²ÎÊı`head`³õÊ¼»¯µ¥Á´±í
-`SLIT_INSERT_HEAD`ºêÔÚµ¥Á´±íµÄÍ·²¿²åÈëÒ»¸öÔªËØ`elm`
-`SLIST_INSERT_AFTER`ºê²åÈëÒ»¸öĞÂÔªËØ`elm`
-`SLIST_REMOVE_HEAD`ºê´Óµ¥Á´±íÍ·²¿ÒÆ³ıÔªËØ`elm`
-`SLIST_REMOVE`ºê´Óµ¥Á´±íÖĞÒÆ³ı`elm`
+`SLIST_ENTRY`å®å£°æ˜äº†ä¸€ä¸ªè¿æ¥å•é“¾è¡¨å†…å…ƒç´ çš„ç»“æ„ä½“
+`SLIST_INIT`å®é€šè¿‡å‚æ•°`head`åˆå§‹åŒ–å•é“¾è¡¨
+`SLIT_INSERT_HEAD`å®åœ¨å•é“¾è¡¨çš„å¤´éƒ¨æ’å…¥ä¸€ä¸ªå…ƒç´ `elm`
+`SLIST_INSERT_AFTER`å®æ’å…¥ä¸€ä¸ªæ–°å…ƒç´ `elm`
+`SLIST_REMOVE_HEAD`å®ä»å•é“¾è¡¨å¤´éƒ¨ç§»é™¤å…ƒç´ `elm`
+`SLIST_REMOVE`å®ä»å•é“¾è¡¨ä¸­ç§»é™¤`elm`
 
 
 
-##µ¥ÏòÁ´±íµÄÀı×Ó
+##å•å‘é“¾è¡¨çš„ä¾‹å­
 ```c++
 LIST_HEAD(slisthead, entry) head;
-struct slisthead *headp;		/* µ¥ÏòÁ´±íÍ·²¿ */
+struct slisthead *headp;		/* å•å‘é“¾è¡¨å¤´éƒ¨ */
 struct entry {
-	SLIST_ENTRY(entry) entries;		/* µ¥ÏòÁ´±í */
+	SLIST_ENTRY(entry) entries;		/* å•å‘é“¾è¡¨ */
 	int data;
 } *n1, *n2, *n3, *np;
 
-SLIST_INIT(&head);		/* ³õÊ¼»¯Á´±í */
+SLIST_INIT(&head);		/* åˆå§‹åŒ–é“¾è¡¨ */
 
-n1 = malloc(sizeof(struct entry));		/* ²åÈëµ½Í·²¿ */
+n1 = malloc(sizeof(struct entry));		/* æ’å…¥åˆ°å¤´éƒ¨ */
 SLIST_INSERT_HEAD(&head, n1, entries);
 
-n2 = malloc(sizeof(struct entry));		/* ²åÈën1ºóÃæ */
+n2 = malloc(sizeof(struct entry));		/* æ’å…¥n1åé¢ */
 SLIST_INSERT_AFTER(n1, n2, entries);
 
-SLIST_REMOVE(&head, n2, entry, entries);		/* ÒÆ³ın2 */
+SLIST_REMOVE(&head, n2, entry, entries);		/* ç§»é™¤n2 */
 free(n2);
 
-n3 = head.slh_first;		/* ÒÆ³ıÍ·²¿ÔªËØ */
+n3 = head.slh_first;		/* ç§»é™¤å¤´éƒ¨å…ƒç´  */
 SLIST_REMOVE_HEAD(&head, entries);
 free(n3);
 
-for (np = head.slh_first; np != NULL; np = np->entries.sle_next)		/* ±éÀú */
+for (np = head.slh_first; np != NULL; np = np->entries.sle_next)		/* éå† */
 	np->data = 1;
 	
 while (head.slh_first != NULL) {
@@ -113,5 +113,5 @@ while (head.slh_first != NULL) {
 }
 ```
 
-###²Î¿¼×ÊÁÏ
+###å‚è€ƒèµ„æ–™
 [GNO:queue(3)](http://www.gno.org/gno/man/man3/queue.3.html)
