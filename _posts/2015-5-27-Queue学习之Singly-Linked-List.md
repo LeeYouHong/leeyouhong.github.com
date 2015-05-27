@@ -1,6 +1,6 @@
 ﻿---
 layout: post
-title: Queue学习之Singly-Linked-List
+title: Singly-Linked-List
 ---
 
 ##Singly-Linked-Lists
